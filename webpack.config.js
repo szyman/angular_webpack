@@ -51,9 +51,16 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
-    new HtmlWebpackPlugin({  // Also generate a test.html
+    new HtmlWebpackPlugin({
       filename: 'app.component.html',
       template: 'src/app/app.component.html'
-    })
+    }),
+    new webpack.ContextReplacementPlugin(
+      // if you have anymore problems tweet me at @gdi2290
+      // The (\\|\/) piece accounts for path separators for Windows and MacOS
+      /(.+)?angular(\\|\/)core(.+)?/,
+      './src', // location of your src
+      {} // a map of your routes
+    )
   ]
 };
