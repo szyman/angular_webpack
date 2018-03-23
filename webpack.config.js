@@ -15,12 +15,19 @@ module.exports = {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.(ts|js)$/,
+        loaders: [
+          'angular-router-loader'
+        ]
       },
       {
         test: /\.html$/,
@@ -54,6 +61,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'app.component.html',
       template: 'src/app/app.component.html'
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'test.component.html',
+      template: 'src/app/test/test.component.html'
     }),
     new webpack.ContextReplacementPlugin(
       // if you have anymore problems tweet me at @gdi2290
